@@ -13,7 +13,7 @@ pipeline {
         }
         stage('SonarQube analysis 2') {
             steps {
-                sh 'gradle sonarqube'
+                sh 'maven sonarqube'
             }
         }
         stage("Quality Gate 2") {

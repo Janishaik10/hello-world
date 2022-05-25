@@ -3,7 +3,9 @@ pipeline {
     stages {
         stage('scm checkout') {
             steps {
-                sh ''
+                sh 'https://github.com/Janishaik10/hello-world.git'
+            }
+        }
         stage('SonarQube analysis 1') {
             steps {
                 sh 'clean package sonar:sonar'

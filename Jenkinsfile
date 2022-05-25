@@ -8,7 +8,7 @@ pipeline {
         }
         stage('SonarQube analysis 1') {
             steps {
-                sh 'clean package sonar:sonar'
+                sh 'clean install sonar:sonar'
             }
         }
         stage("Quality Gate 1") {

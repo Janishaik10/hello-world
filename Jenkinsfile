@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('scm checkout') {
             steps {
-                sh 'https://github.com/Janishaik10/hello-world.git'
+                git 'https://github.com/Janishaik10/hello-world.git'
             }
         }
         stage('SonarQube analysis 1') {

@@ -1,9 +1,12 @@
 pipeline {
     agent any
     stages {
+        stage('scm checkout') {
+            steps {
+                sh ''
         stage('SonarQube analysis 1') {
             steps {
-                sh 'mvn clean package sonar:sonar'
+                sh 'clean package sonar:sonar'
             }
         }
         stage("Quality Gate 1") {

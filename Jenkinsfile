@@ -3,7 +3,7 @@ node {
     checkout scm
   }
   stage('SonarQube Analysis') {
-    withSonarQubeEnv('My SonarQube Server') {
+    withSonarQubeEnv(credentialsId: 'sonar-poc') {
       sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=sonar-pipeline"
     }
   }

@@ -1,29 +1,28 @@
 pipeline {
     agent any
     stages {
-        stage('scm checkout') {
+        stage('SCM') {
             steps {
-                git 'https://github.com/Janishaik10/hello-world.git'
+                git url: 'https://github.com/foo/bar.git'
             }
         }
-        stage('SonarQube analysis 1') {
+        stage('build && SonarQube analysis') {
             steps {
-                sh 'clean install sonar:sonar'
+                withSonarQubeEnv('My SonarQube Server') {
+                    // Optionally use a Maven environment you've configured already
+                    withMaven(maven:'Maven 3.8.5') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                }
             }
         }
-        stage("Quality Gate 1") {
+        stage("Quality Gate") {
             steps {
-                waitForQualityGate abortPipeline: true
-            }
-        }
-        stage('SonarQube analysis 2') {
-            steps {
-                sh 'maven sonarqube'
-            }
-        }
-        stage("Quality Gate 2") {
-            steps {
-                waitForQualityGate abortPipeline: true
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    waitForQualityGate abortPipeline: true
+                }
             }
         }
     }

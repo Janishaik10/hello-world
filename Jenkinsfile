@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('SCM') {
             steps {
-                git url: 'https://github.com/foo/bar.git'
+                git url: 'https://github.com/Janishaik10/hello-world.git'
             }
         }
         stage('build && SonarQube analysis') {
